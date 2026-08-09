@@ -1,0 +1,158 @@
+body {
+    background-color: #12151A;
+    color: #dee3e7;
+    overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .reveal-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+
+    .nav-link {
+        position: relative;
+    }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #5cd4ff;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+        box-shadow: 0 0 8px rgba(92, 212, 255, 0.8);
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .btn-glow-cyan {
+        transition: all 0.3s ease;
+    }
+    .btn-glow-cyan:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(92, 212, 255, 0.5);
+    }
+    .btn-glow-amber {
+        transition: all 0.3s ease;
+    }
+    .btn-glow-amber:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 185, 90, 0.5);
+        background-color: rgba(255, 185, 90, 0.1);
+    }
+
+    .glow-card {
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    .glow-card:hover {
+        transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
+        border-color: rgba(92, 212, 255, 0.6) !important;
+        box-shadow: 0 10px 30px -10px rgba(92, 212, 255, 0.4);
+    }
+    .title-cursor::after {
+        content: '_';
+        opacity: 0;
+        color: #5cd4ff;
+        animation: blink-caret 1s step-end infinite;
+        display: inline-block;
+        margin-left: 4px;
+    }
+    .glow-card:hover .title-cursor::after {
+        opacity: 1;
+    }
+
+    .timeline-node {
+        transition: all 0.3s ease;
+    }
+    .timeline-item:hover .timeline-node {
+        transform: scale(1.2);
+        box-shadow: 0 0 10px currentColor;
+    }
+
+    .scanlines {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 9998;
+        background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0),
+            rgba(255,255,255,0) 50%,
+            rgba(92, 212, 255, 0.2) 50%,
+            rgba(92, 212, 255, 0)
+        );
+        background-size: 100% 4px;
+        animation: scanline 10s linear infinite;
+        opacity: 0.02;
+    }
+    @keyframes scanline {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 100vh; }
+    }
+
+    .boot-sequence {
+        position: fixed;
+        inset: 0;
+        background-color: #12151A;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Fira Code', monospace;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+    .boot-sequence.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .typing-effect {
+        overflow: hidden;
+        border-right: 2px solid transparent;
+        white-space: nowrap;
+        margin: 0 auto;
+        letter-spacing: .15em;
+        animation: typing 1s steps(30, end) forwards, blink-caret-solid .75s step-end infinite;
+    }
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+    @keyframes blink-caret-solid {
+        from, to { border-color: transparent }
+        50% { border-color: #5cd4ff; }
+    }
+}
+
+.pulse-green {
+    animation: pulse-green 2s infinite;
+}
+@keyframes pulse-green {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 211, 83, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(57, 211, 83, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 211, 83, 0); }
+}
+
+@keyframes blink-caret {
+    from, to { opacity: 0; }
+    50% { opacity: 1; }
+}
